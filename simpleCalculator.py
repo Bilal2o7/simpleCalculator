@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import tkinter as tk
 
 root = tk.Tk()
@@ -25,3 +26,10 @@ for button in buttons:
         row += 1
 
 root.mainloop()
+=======
+import tkinter as tk
+
+root = tk.Tk()
+root.geometry("300x275")
+root.mainloop()
+>>>>>>> fa9feffd47e4eacc46c8d56a4f31bed65389ec31

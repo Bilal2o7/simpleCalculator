@@ -17,7 +17,7 @@ def button_press(symbol):
     else:
         entry.insert(tk.END, symbol)
 
-entry = tk.Entry(root, font=("Arial, 18"))
+entry = tk.Entry(root, font = ("Arial, 18"))
 entry.grid(row = 0, column = 0, columnspan = 4, padx = 20, pady = 10)
 
 #Makes the symbols on the buttons
@@ -27,13 +27,17 @@ buttons = [
     '1', '2', '3', '-',
     'C', '0', '=', '+' ]
 
-row = 0
+row = 1
 col = 0
 
+Button_widget = []
+for button_text in buttons:
+    bn = tk.Button(root, text = button_text, font = ("Arial", 18), padx = 20, pady = 10)
+    bn.grid(row = row, column = col)
 #Makes the buttons and gives them size and font
 for button in buttons:
-    bn = tk.Button(root, text=button, font=("Arial", 18), padx=20, pady=10)
-    bn.grid(row=row, column=col)
+    bn = tk.Button(root, text = button, font = ("Arial", 18), padx = 20, pady = 10)
+    bn.grid(row = row, column = col)
     
     #First adds columns then stops the column after its reached 3 columns and then starts to add rows
     col += 1

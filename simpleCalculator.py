@@ -3,19 +3,27 @@ import tkinter as tk
 root = tk.Tk()
 root.title("simpleCalculator")
 
+#Check for button press and acts accordently
 def button_press(symbol):
     if symbol == '=':
-        try:
-            result = eval(entry.get())
-            entry.delete(0, tk.END)
-            entry.insert(tk.END, str(result))
-        except:
-            entry.delete(0, tk.END)
-            entry.insert(tk.END, "Error")
+        expression()
     elif symbol == 'C':
-        entry.delete(0, tk.END)
+        clear()
     else:
-        entry.insert(tk.END, symbol)
+        clear.insert(tk.END, symbol)
+
+def expression():
+    try:
+        result = eval(entry.get())
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, str("Result"))
+    except:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, "Error")
+
+# Clears the calcualtor
+def clear():
+    entry.delete(0, tk.END)
 
 entry = tk.Entry(root, font = ("Arial, 18"))
 entry.grid(row = 0, column = 0, columnspan = 4, padx = 20, pady = 10)
@@ -34,7 +42,8 @@ Button_widget = []
 for button_text in buttons:
     bn = tk.Button(root, text = button_text, font = ("Arial", 18), padx = 20, pady = 10)
     bn.grid(row = row, column = col)
-#Makes the buttons and gives them size and font
+
+#Erects buttons and gives them size and font
 for button in buttons:
     bn = tk.Button(root, text = button, font = ("Arial", 18), padx = 20, pady = 10)
     bn.grid(row = row, column = col)

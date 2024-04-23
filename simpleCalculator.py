@@ -1,6 +1,12 @@
 import tkinter as tk
+import math 
+import ttkthemes
+from tkinter import ttk
 
-root = tk.Tk()
+
+root = ttkthemes.ThemedTk()
+root.get_themes()
+root.set_theme('radiance')
 root.title("simpleCalculator")
 
 #Check for button press and acts accordently
@@ -9,14 +15,25 @@ def button_press(symbol):
         expression()
     elif symbol == 'C':
         clear()
+    elif symbol == 'sq':
+        square_root()
     else:
-        clear.insert(tk.END, symbol)
+        entry.insert(tk.END, symbol)
 
 def expression():
     try:
         result = eval(entry.get())
         entry.delete(0, tk.END)
         entry.insert(tk.END, str("Result"))
+    except:
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, "Error")
+
+def square_root():
+    try:
+        result = math.sqrt(float(entry.get()))
+        entry.delete(0, tk.END)
+        entry.insert(tk.END, str(result))
     except:
         entry.delete(0, tk.END)
         entry.insert(tk.END, "Error")
@@ -33,14 +50,14 @@ buttons = [
     '7', '8', '9', '/',
     '4', '5', '6', '*',
     '1', '2', '3', '-',
-    'C', '0', '=', '+' ]
+    'C', '0', '=', '+', 'sq', '.' ]
 
 row = 1
 col = 0
 
-Button_widget = []
+ttk.Button_widget = []
 for button_text in buttons:
-    bn = tk.Button(root, text = button_text, font = ("Arial", 18), padx = 20, pady = 10)
+    bn = tk.Button(root, text = button_text, font = ("Arial", 18), padx = 20, pady = 10, command = lambda b = button_text: button_press(b))
     bn.grid(row = row, column = col)
 
 #Erects buttons and gives them size and font

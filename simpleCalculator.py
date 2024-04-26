@@ -1,75 +1,55 @@
 import tkinter as tk
-import math 
-import ttkthemes
-from tkinter import ttk
 
+class Caluclator:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("simpleCalculator")
 
-root = ttkthemes.ThemedTk()
-root.get_themes()
-root.set_theme('radiance')
-root.title("simpleCalculator")
+        self.entry = tk.entry(root, font = ("Arial", 20))
+        self.entry.grid(row = 0, column = 0, columnspan = 4, padx = 10, pady = 10)
+
+        self.buttons = [
+        '7', '8', '9', '/',
+        '4', '5', '6', '*',
+        '1', '2', '3', '-',
+        'C', '0', '=', '+']
+
+        self.create_buttons()
+
+def erecting_buttons(self):
+    row = 1
+    col = 0
+    for button_text in self.buttons:
+        btn = tk.Button(self.root, text = button_text, width = 5, height = 2, font = ("Arial", 18),  command = lambda b = button_text: self.button_press(b))
+        btn.grid(row = row, column = col, padx = 5, pady = 5)
+        col += 1
+        if col > 3:
+            col = 0
+            row += 1
 
 #Check for button press and acts accordently
-def button_press(symbol):
+def button_press(self, symbol):
     if symbol == '=':
-        expression()
+        self.expression()
     elif symbol == 'C':
-        clear()
-    elif symbol == 'sq':
-        square_root()
+        self.clear_entry()
     else:
-        entry.insert(tk.END, symbol)
+        self.entry.insert(tk.END, symbol)
 
-def expression():
+def expression(self):
     try:
-        result = eval(entry.get())
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, str("Result"))
+        result = eval(self.entry.get())
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, str("Result"))
     except:
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, "Error")
-
-def square_root():
-    try:
-        result = math.sqrt(float(entry.get()))
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, str(result))
-    except:
-        entry.delete(0, tk.END)
-        entry.insert(tk.END, "Error")
+        self.entry.delete(0, tk.END)
+        self.entry.insert(tk.END, "Error")
 
 # Clears the calcualtor
-def clear():
-    entry.delete(0, tk.END)
+def clear_entry(self):
+    self.entry.delete(0, tk.END)
 
-entry = tk.Entry(root, font = ("Arial, 18"))
-entry.grid(row = 0, column = 0, columnspan = 4, padx = 20, pady = 10)
-
-#Makes the symbols on the buttons
-buttons = [
-    '7', '8', '9', '/',
-    '4', '5', '6', '*',
-    '1', '2', '3', '-',
-    'C', '0', '=', '+', 'sq', '.' ]
-
-row = 1
-col = 0
-
-ttk.Button_widget = []
-for button_text in buttons:
-    bn = tk.Button(root, text = button_text, font = ("Arial", 18), padx = 20, pady = 10, command = lambda b = button_text: button_press(b))
-    bn.grid(row = row, column = col)
-
-#Erects buttons and gives them size and font
-for button in buttons:
-    bn = tk.Button(root, text = button, font = ("Arial", 18), padx = 20, pady = 10)
-    bn.grid(row = row, column = col)
-    
-    #First adds columns then stops the column after its reached 3 columns and then starts to add rows
-    col += 1
-    if col > 3:
-        col = 0
-        row += 1
-
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.mainloop()
 

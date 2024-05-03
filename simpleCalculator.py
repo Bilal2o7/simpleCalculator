@@ -1,10 +1,11 @@
 import tkinter as tk
+import math
 
 class Caluclator:
     def __init__(self, root):
         self.root = root
         self.root.title("simpleCalculator")
-
+        
         self.entry = tk.Entry(root, font = ("Arial", 20))
         self.entry.grid(row = 0, column = 0, columnspan = 4, padx = 10, pady = 10)
 
@@ -12,7 +13,7 @@ class Caluclator:
         '7', '8', '9', '/',
         '4', '5', '6', '*',
         '1', '2', '3', '-',
-        'C', '0', '=', '+'
+        'C', '0', '=', '+', "sq", "^"
         ]
 
         self.create_buttons()
@@ -28,7 +29,6 @@ class Caluclator:
                 col = 0
                 row += 1
 
-        #Check for button press and acts accordently
     def button_press(self, symbol):
         if symbol == '=':
             self.evaluate_expression()
@@ -39,14 +39,15 @@ class Caluclator:
 
     def evaluate_expression(self):
         try:
-            result = eval(self.entry.get())
+            expression = self.entry.get()
+            expression = expression.replace("^", "**")
+            result = eval(expression)
             self.entry.delete(0, tk.END)
-            self.entry.insert(tk.END, str("Result"))
+            self.entry.insert(tk.END, (result))
         except:
             self.entry.delete(0, tk.END)
             self.entry.insert(tk.END, "Error")
 
-    # Clears the calcualtor
     def clear_entry(self):
         self.entry.delete(0, tk.END)
 
